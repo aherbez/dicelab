@@ -34,6 +34,9 @@ export class ResultsGrid extends Entity {
         const d1 = this.dieA;
         const d2 = this.dieB;
 
+        const valuesA = [...this.dieA.values].sort();
+        const valuesB = [...this.dieB.values].sort();
+
         const gridUnitsX = d1.numSides + 1;
         const gridUnitsY = d2.numSides + 1;
 
@@ -52,9 +55,9 @@ export class ResultsGrid extends Entity {
         for (let i=0; i < d1.numSides; i++) {
             for (let j=0; j < d2.numSides; j++) {
                 let fillColor = Colors.tiedColor;
-                if (d1.values[i] > d2.values[j]) {
+                if (valuesA[i] > valuesB[j]) {
                     fillColor = d1.color;
-                } else if (d2.values[j] > d1.values[i]) {
+                } else if (valuesB[j] > valuesA[i]) {
                     fillColor = d2.color;
                 }
                 ctx.fillStyle = fillColor;
@@ -76,7 +79,7 @@ export class ResultsGrid extends Entity {
             if (i > 0) {
                 ctx.save();
                 ctx.translate(cellWidth * 0.2, cellHeight * 0.8);
-                ctx.fillText(d1.values[i-1]+'', 0, 0);
+                ctx.fillText(valuesA[i-1]+'', 0, 0);
                 ctx.restore();
             }
 
@@ -95,7 +98,7 @@ export class ResultsGrid extends Entity {
             if (i > 0) {
                 ctx.save();
                 ctx.translate(cellWidth * 0.2, cellHeight * 0.8);
-                ctx.fillText(d2.values[i-1]+'', 0, 0);
+                ctx.fillText(valuesB[i-1]+'', 0, 0);
                 ctx.restore();
             }
 

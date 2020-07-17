@@ -33,7 +33,6 @@ export class SingleDiePanel extends Entity {
     setDieValue(index, value) {
         console.log(`setting face ${index} to ${value}`);
         this.diceData.values[index] = value;
-        this.diceData.values.sort();
     }
 
     // maybe alter pips

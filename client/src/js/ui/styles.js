@@ -1,9 +1,9 @@
 export const Dimensions = {
     panelWidth: 500,
-    dieSize: 80,
+    dieSize: 60,
     dieSeparation: 10,
     diePanelOffsetY: 90,
-    pipRad: 10,
+    pipRad: 5,
     diePanelOffsetX: 70,
     resultsPanelSize: 380,
 }
