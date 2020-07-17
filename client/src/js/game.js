@@ -70,6 +70,7 @@ export class DicelabClient {
         */
 
         this.gameRegistry.diceManager = new DiceManager(2, 6);
+        this.gameRegistry.diceManager.dice[0].setConstant(3);
 
         this.mainScreen = new GameScreen(this.gameRegistry);
         this.children.push(this.mainScreen);

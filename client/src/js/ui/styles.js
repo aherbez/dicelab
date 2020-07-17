@@ -3,6 +3,7 @@ export const Dimensions = {
     dieSize: 80,
     dieSeparation: 10,
     diePanelOffsetY: 90,
+    pipRad: 10,
 }
 
 export const Colors = {
@@ -11,4 +12,5 @@ export const Colors = {
     backColorOff: '#f9c49a',
     borderColorMain: '#7c3c21',
     backgroundBlue: '#12cad6',
+    pipColor: '#000',
 }
