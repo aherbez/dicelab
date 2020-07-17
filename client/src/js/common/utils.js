@@ -13,3 +13,7 @@ export const drawRoundedRect = (ctx, w, h, r) => {
 
     ctx.closePath();
 }
+
+export const percentStr = (p) => {
+    return `${(p * 100).toFixed(0)}%`;
+}

@@ -85,7 +85,9 @@ export class DiceManager {
             dieBFracStr: '',
             dieAPercent: 0,
             dieBPercent: 0,
-            winners: []
+            winners: [],
+            dieAindex: indexA,  // keep these here for ease of use when rendering results
+            dieBindex: indexB
         }
         for (let i=0; i < d1.values.length; i++) {
             for (let j=0; j < d2.values.length; j++) {

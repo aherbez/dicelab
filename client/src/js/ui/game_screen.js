@@ -4,6 +4,7 @@ import { Button } from '../ui/button';
 import { Colors } from './styles';
 import { DicePanel } from '../dice/dice_panel';
 import { ResultsGrid } from '../dice/results_grid';
+import { ResultsPercent } from '../dice/results_percent';
 
 export class GameScreen extends Entity {
     constructor(gr) {
@@ -21,5 +22,9 @@ export class GameScreen extends Entity {
         this.resultsGrid = new ResultsGrid(this.registry);
         this.resultsGrid.setPos(10, 200);
         this.children.push(this.resultsGrid);
+
+        this.resultsPercent = new ResultsPercent(this.registry);
+        this.resultsPercent.setPos(400, 200);
+        this.children.push(this.resultsPercent);
     }
 }

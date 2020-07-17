@@ -25,7 +25,7 @@ class DiePip extends Entity {
 
     render(ctx) {
         const { pipRad } = Dimensions;
-        const { pipColor } = Colors; 
+        const { pipColor, dieColorActive, dieColorLocked } = Colors; 
 
         ctx.save();
 
@@ -174,10 +174,14 @@ export class DieFace extends Entity {
 
     render(ctx) {
         const { dieSize } = Dimensions;
+        const { dieColorActive, dieColorLocked } = Colors; 
 
         ctx.save();
 
+        ctx.fillStyle = dieColorActive;
+        ctx.fillRect(0, 0, dieSize, dieSize);
         ctx.strokeRect(0, 0, dieSize, dieSize);
+
 
         ctx.restore();
     }

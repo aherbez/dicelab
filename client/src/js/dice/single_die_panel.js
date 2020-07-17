@@ -45,10 +45,12 @@ export class SingleDiePanel extends Entity {
     }
 
     drawDieName(ctx) {
-        const { dieSize, dieSeparation, diePanelOffsetX } = Dimensions; 
+        const { dieSize, dieSeparation, diePanelOffsetX } = Dimensions;
+        const { textColor } = Colors; 
 
         ctx.save();
         ctx.font = '60px Helvetica';
+        ctx.fillStyle = textColor;
         ctx.fillText(this.label, 10, dieSize * 0.8);
         ctx.restore();
     }
@@ -56,6 +58,8 @@ export class SingleDiePanel extends Entity {
     render(ctx) {
         ctx.save();
 
+        ctx.fillStyle = this.diceData.color;
+        ctx.fillRect(0, 0, this.bounds.x, this.bounds.y);
         ctx.strokeRect(0, 0, this.bounds.x, this.bounds.y);
 
         this.drawDieName(ctx);

@@ -6,6 +6,8 @@ export const Dimensions = {
     pipRad: 5,
     diePanelOffsetX: 70,
     resultsPanelSize: 380,
+    percentPanelW: 300,
+    percentPanelH: 270,
 }
 
 export const Colors = {
@@ -17,4 +19,7 @@ export const Colors = {
     pipColor: '#000',
     diceColors: ['#f00', '#0F0', '#00F'],
     tiedColor: '#aaa',
+    textColor: '#000',
+    dieColorActive: '#fff',
+    dieColorLocked: '#aaa',
 }
