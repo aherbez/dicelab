@@ -1,3 +1,3 @@
-import { ClickerClient } from './game';
+import { DicelabClient } from './game';
 
-let client = new ClickerClient('stage');
+let client = new DicelabClient('stage');

@@ -104,7 +104,7 @@ export class DicelabClient {
         ctx.restore();
     }
 
-    update = () => {
+    update() {
         const { playerInventory } = this.gameRegistry;
 
         let curr = Date.now();
@@ -117,7 +117,7 @@ export class DicelabClient {
 
         this.render(deltaTime);
 
-        requestAnimationFrame(this.update);
+        requestAnimationFrame(this.update.bind(this));
     }
 
 }
