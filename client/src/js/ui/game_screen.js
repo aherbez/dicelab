@@ -47,23 +47,25 @@ export class GameScreen extends Entity {
 
     }
 
-    resetGame() {
+    resetGame(isChallenge) {
         this.dicePanel.reset();
         this.resultsGrid.reset();
+
+        this.dicePanel.setChallenge(isChallenge);
     }
 
     clearChallenge() {
         const { challenges, diceManager } = this.registry;
         challenges.setToFreeplay();
         console.log('FREEPLAY!');
-        this.resetGame();
+        this.resetGame(false);
     }
 
     setChallenge() {
         const { challenges, diceManager } = this.registry;
         challenges.setToRandomChallenge();
         console.log('RANDOM CHALLENGE');
-        this.resetGame();
+        this.resetGame(true);
 
     }
 }

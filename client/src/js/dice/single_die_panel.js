@@ -82,6 +82,29 @@ export class SingleDiePanel extends Entity {
         ctx.restore();
     }
 
+    drawLock(ctx) {
+        const { dieSize, dieSeparation, diePanelOffsetX } = Dimensions;
+        const rightEdge = this.bounds.x + 10 + dieSize/2;
+        
+        ctx.save();
+
+        ctx.fillStyle = '#E24E1B';
+        ctx.strokeStyle = '#E24E1B';
+
+        const circleRad = dieSize * 0.4;
+
+        let angleOffset = Math.sin(Math.PI/4) * circleRad;
+
+        ctx.lineWidth = 10;
+        ctx.beginPath();
+        ctx.arc(rightEdge, dieSize/2 + dieSeparation, circleRad, 0, Math.PI * 2);
+        ctx.moveTo(rightEdge + angleOffset, dieSize/2 + dieSeparation - angleOffset);
+        ctx.lineTo(rightEdge - angleOffset, dieSize/2 + dieSeparation + angleOffset);
+        ctx.stroke();
+
+        ctx.restore();
+    }
+
     render(ctx) {
         ctx.save();
 
@@ -91,8 +114,10 @@ export class SingleDiePanel extends Entity {
 
         this.drawDieName(ctx);
 
-        if (this.isChallengePanel) {
+        if (this.enabled) {
             this.drawTotalPips(ctx);
+        } else {
+            this.drawLock(ctx);
         }
 
         ctx.restore();
