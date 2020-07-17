@@ -13,12 +13,14 @@ class DiePip extends Entity {
     }
     
     onClick(pos) {
+        /*
         const { pipRad } = Dimensions;
         console.log('removing pip!');
         if (this.removeCB) {
             this.removeCB();
         }
         return true;
+        */
     }
 
     render(ctx) {
@@ -52,6 +54,14 @@ export class DieFace extends Entity {
         this.canRemovePips = true;
 
         this.updatePips();
+    }
+
+    onClick(pos) {
+        if (pos.y < this.bounds.y * 0.4) {
+            this.addPip();
+        } else if (pos.y > this.bounds.y * 0.6) {
+            this.removePip();
+        }
     }
 
     updatePips() {
@@ -141,16 +151,24 @@ export class DieFace extends Entity {
         if (this.numPips > 0) {
             this.numPips--;
             this.updatePips();
+            this.maybeSignalChange();
         }
     }
 
-    onClick(pos) {
+    addPip() {
         if (!this.canAddPips) return;
 
         console.log('adding pip');
         if (this.numPips < 9) {
             this.numPips++;
             this.updatePips();
+            this.maybeSignalChange();
+        }
+    }
+
+    maybeSignalChange() {
+        if (this.changeCB !== null) {
+            this.changeCB(this.numPips);
         }
     }
 

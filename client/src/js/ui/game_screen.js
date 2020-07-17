@@ -2,7 +2,8 @@ import { Entity } from '../common/entity';
 import { GameRegistry } from '../game_registry';
 import { Button } from '../ui/button';
 import { Colors } from './styles';
-import { DicePanel } from '../dice/dice_panel'; 
+import { DicePanel } from '../dice/dice_panel';
+import { ResultsGrid } from '../dice/results_grid';
 
 export class GameScreen extends Entity {
     constructor(gr) {
@@ -16,6 +17,9 @@ export class GameScreen extends Entity {
         this.dicePanel = new DicePanel(this.registry);
         this.dicePanel.setPos(10, 10);
         this.children.push(this.dicePanel);
-       
+
+        this.resultsGrid = new ResultsGrid(this.registry);
+        this.resultsGrid.setPos(10, 200);
+        this.children.push(this.resultsGrid);
     }
 }

@@ -1,7 +1,11 @@
+import { Colors } from '../ui/styles';
+
 export class DiceData {
-    constructor(sides) {
+    constructor(sides, label, color) {
         this.numSides = sides;
         this.values = [];
+        this.label = label || 'A';
+        this.color = color || '#fff';
         this.setAscending();
         this.print();
     }
@@ -26,7 +30,9 @@ export class DiceManager {
         this.numDice = numDice;
         this.dice = [];
         for (let i=0; i < numDice; i++) {
-            this.dice[i] = new DiceData(sides);
+            const label = String.fromCharCode(i + 65);
+
+            this.dice[i] = new DiceData(sides, label, Colors.diceColors[i]);
         }
     }
 
