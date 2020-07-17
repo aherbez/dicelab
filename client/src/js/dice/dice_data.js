@@ -43,16 +43,27 @@ export class DiceData {
 
 export class DiceManager {
     constructor(numDice, sides) {
-        this.numDice = numDice;
         this.dice = [];
-        for (let i=0; i < numDice; i++) {
-            const label = String.fromCharCode(i + 65);
-            const dd = new DiceData(sides, label, Colors.diceColors[i]);
-            dd.onChangeCB = this.updateResults.bind(this);
-            this.dice[i] = dd;
-        }
-
         this.lastResults = null;
+    }
+
+    get numDice() {
+        return this.dice.length;
+    }
+
+    clearDice() {
+        this.dice.forEach(d => {
+            d = null;
+        });
+        this.dice = [];
+    }
+
+    addDie(numSides) {
+        const index = this.dice.length;
+        const label = String.fromCharCode(index + 65);
+        const dd = new DiceData(numSides, label, Colors.diceColors[index]);
+        dd.onChangeCB = this.updateResults.bind(this);
+        this.dice.push(dd);
     }
 
     getDie(index) {

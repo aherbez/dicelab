@@ -50,15 +50,16 @@ export class SingleDiePanel extends Entity {
         const { textColor } = Colors;
         const { dieSize, dieSeparation, diePanelOffsetX } = Dimensions;
         
-        const rightEdge = this.bounds.x + 10;
+        const rightEdge = this.bounds.x + 10 + dieSize/2;
 
         ctx.save();
-
+        ctx.textAlign = "center";
         ctx.fillStyle = textColor;
         ctx.font = `${dieSize * 0.8}px Helvetica`;
         ctx.fillText(`${this.diceData.totalPips}`, rightEdge, dieSize * 0.8);
 
-
+        ctx.font = `${dieSize * 0.2}px Helvetica`;
+        ctx.fillText('pips', rightEdge, dieSize);
         ctx.restore();
     }
 
