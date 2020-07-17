@@ -29,4 +29,9 @@ export class DiceManager {
             this.dice[i] = new DiceData(sides);
         }
     }
+
+    getDie(index) {
+        if (index < 0 || index >= this.dice.length) return null;
+        return this.dice[index];
+    }
 }

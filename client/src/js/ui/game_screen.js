@@ -13,23 +13,9 @@ export class GameScreen extends Entity {
     }
 
     init() {
-
+        this.dicePanel = new DicePanel(this.registry);
+        this.dicePanel.setPos(10, 10);
+        this.children.push(this.dicePanel);
        
     }
-
-    saveData() {
-        const { playerStorage } = this.registry;
-        playerStorage.saveData();
-    }
-
-    loadData() {
-        const { playerStorage } = this.registry;
-        playerStorage.loadPlayerData();
-
-    }
-
-    resetData() {
-        console.log(`resetting data`);
-    }
-
 }
