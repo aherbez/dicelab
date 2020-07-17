@@ -22,7 +22,6 @@ export class SingleDiePanel extends Entity {
         this.faces = [];
         this.diceData.values.forEach((v, i) =>  {
             const df = new DieFace(v, (newValue) => {
-                // this.setDieValue(i, newValue);
                 this.diceData.setValue(i, newValue);
             });
             df.setPos((i * (dieSize + dieSeparation)) + (dieSeparation/2) + diePanelOffsetX,
@@ -30,14 +29,6 @@ export class SingleDiePanel extends Entity {
             this.children.push(df);
         });
     }
-
-    /*
-    setDieValue(index, value) {
-        console.log(`setting face ${index} to ${value}`);
-        // this.diceData.values[index] = value;
-        this.diceData.setValue(index, value);
-    }
-    */
 
     // maybe alter pips
     onClick(pos) {
@@ -55,6 +46,22 @@ export class SingleDiePanel extends Entity {
         ctx.restore();
     }
 
+    drawTotalPips(ctx) {
+        const { textColor } = Colors;
+        const { dieSize, dieSeparation, diePanelOffsetX } = Dimensions;
+        
+        const rightEdge = this.bounds.x + 10;
+
+        ctx.save();
+
+        ctx.fillStyle = textColor;
+        ctx.font = `${dieSize * 0.8}px Helvetica`;
+        ctx.fillText(`${this.diceData.totalPips}`, rightEdge, dieSize * 0.8);
+
+
+        ctx.restore();
+    }
+
     render(ctx) {
         ctx.save();
 
@@ -63,6 +70,7 @@ export class SingleDiePanel extends Entity {
         ctx.strokeRect(0, 0, this.bounds.x, this.bounds.y);
 
         this.drawDieName(ctx);
+        this.drawTotalPips(ctx);
 
         ctx.restore();
     }

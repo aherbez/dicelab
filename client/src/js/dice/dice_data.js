@@ -33,6 +33,12 @@ export class DiceData {
         console.log(this.numSides, s);
     }
 
+    get totalPips() {
+        return this.values.reduce((acc, v) => {
+            return acc + v;
+        });
+    }
+
 }
 
 export class DiceManager {
