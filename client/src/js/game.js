@@ -59,15 +59,6 @@ export class DicelabClient {
     }
 
     startGame() {
-        /*
-        const { 
-            gameData,
-            businessLookup,
-            achievements,
-            playerStorage,
-            upgrades
-        } = this.gameRegistry;
-        */
 
         this.gameRegistry.diceManager = new DiceManager(2, 6);
         this.gameRegistry.diceManager.dice[0].setConstant(3);
@@ -79,7 +70,6 @@ export class DicelabClient {
         this.gameRegistry.toasts = new ToastManager(this.gameRegistry);
         this.gameRegistry.toasts.setPos(0, 0);
         this.mainScreen.children.push(this.gameRegistry.toasts);
-
     }
 
     /**

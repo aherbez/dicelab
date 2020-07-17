@@ -22,7 +22,8 @@ export class SingleDiePanel extends Entity {
         this.faces = [];
         this.diceData.values.forEach((v, i) =>  {
             const df = new DieFace(v, (newValue) => {
-                this.setDieValue(i, newValue);
+                // this.setDieValue(i, newValue);
+                this.diceData.setValue(i, newValue);
             });
             df.setPos((i * (dieSize + dieSeparation)) + (dieSeparation/2) + diePanelOffsetX,
                 dieSeparation);
@@ -30,10 +31,13 @@ export class SingleDiePanel extends Entity {
         });
     }
 
+    /*
     setDieValue(index, value) {
         console.log(`setting face ${index} to ${value}`);
-        this.diceData.values[index] = value;
+        // this.diceData.values[index] = value;
+        this.diceData.setValue(index, value);
     }
+    */
 
     // maybe alter pips
     onClick(pos) {

@@ -29,7 +29,7 @@ export class ResultsGrid extends Entity {
     }
 
     renderGrid(ctx) {
-        const { resultsPanelSize } = Dimensions; 
+        const { resultsPanelSize } = Dimensions;
         
         const d1 = this.dieA;
         const d2 = this.dieB;
@@ -62,6 +62,7 @@ export class ResultsGrid extends Entity {
                 }
                 ctx.fillStyle = fillColor;
                 ctx.fillRect(i * cellWidth, j * cellHeight, cellWidth, cellHeight);
+                
             }
         }
         ctx.restore();
