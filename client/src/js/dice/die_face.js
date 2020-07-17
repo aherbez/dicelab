@@ -8,15 +8,17 @@ class DiePip extends Entity {
 
         this.bounds.x = pipRad;
         this.bounds.y = pipRad;
+
+        this.removeCB = null;
     }
     
     onClick(pos) {
         const { pipRad } = Dimensions;
-
-        const len = pos.x * pos.x + pos.y * pos.y;
-        if (len <= (pipRad * pipRad)) {
-            console.log('removing pip!');
+        console.log('removing pip!');
+        if (this.removeCB) {
+            this.removeCB();
         }
+        return true;
     }
 
     render(ctx) {
@@ -24,7 +26,6 @@ class DiePip extends Entity {
         const { pipColor } = Colors; 
 
         ctx.save();
-
 
         ctx.beginPath();
         ctx.arc(pipRad/2, pipRad/2, pipRad, 0, Math.PI * 2);
@@ -37,14 +38,33 @@ class DiePip extends Entity {
 export class DieFace extends Entity {
     constructor(n, changeCB) {
         super();
+        
+        const { dieSize, pipRad } = Dimensions;
+
         this.changeCB = changeCB || null;
-        this.setNumPips(n);
+        this.numPips = n;
+        this.pips = [];
+
+        this.bounds.x = dieSize;
+        this.bounds.y = dieSize;
+
+        this.canAddPips = true;
+        this.canRemovePips = true;
+
+        this.updatePips();
     }
 
-    setNumPips(n) {
+    updatePips() {
+        const n = this.numPips;
         const { dieSize, pipRad } = Dimensions;
 
         const pipOffset = -(pipRad/2);
+
+        const removeFunc = this.removePip.bind(this);
+
+        this.pips.forEach(p => {
+            p = null;
+        });
         this.pips = [];
 
         // top-left
@@ -94,25 +114,44 @@ export class DieFace extends Entity {
         }
 
         // top-cent
-        if (n > 6) {
+        if (n > 7) {
             const p = new DiePip();
             p.setPos(dieSize * 0.5 + pipOffset, dieSize * 0.2 + pipOffset);
             this.pips.push(p);
         }
 
         // bottom-cent
-        if (n > 6) {
+        if (n > 8) {
             const p = new DiePip();
             p.setPos(dieSize * 0.5 + pipOffset, dieSize * 0.8 + pipOffset);
             this.pips.push(p);
         }
 
+        this.pips.forEach(p => {
+            p.removeCB = this.removePip.bind(this);
+        });
+
         this.children = [];
         this.children = this.children.concat(this.pips);
     }
 
-    onClick(pos) {
+    removePip() {
+        if (!this.canRemovePips) return;
 
+        if (this.numPips > 0) {
+            this.numPips--;
+            this.updatePips();
+        }
+    }
+
+    onClick(pos) {
+        if (!this.canAddPips) return;
+
+        console.log('adding pip');
+        if (this.numPips < 9) {
+            this.numPips++;
+            this.updatePips();
+        }
     }
 
     render(ctx) {
@@ -121,7 +160,6 @@ export class DieFace extends Entity {
         ctx.save();
 
         ctx.strokeRect(0, 0, dieSize, dieSize);
-
 
         ctx.restore();
     }

@@ -48,13 +48,24 @@ export class Entity {
             y: pos.y - this.pos.y
         }
 
-        if ((localPos.x >= 0 && localPos.x < this.bounds.x) && 
-            (localPos.y > 0 && localPos.y < this.bounds.y)) {
-                this.onClick(localPos);
-        }
+        let stopPropagation = false;
+
         this.children.forEach(c => {
-            c.handleClickInternal(localPos);
-        })
+            if (c.handleClickInternal(localPos)) {
+                stopPropagation = true;
+            };
+        });
+
+        if (!stopPropagation) {
+            if ((localPos.x >= 0 && localPos.x < this.bounds.x) && 
+            (localPos.y > 0 && localPos.y < this.bounds.y)) {
+                let thisStopPropagation = this.onClick(localPos);
+                if (thisStopPropagation) {
+                    stopPropagation = true;
+                }
+            }
+        }
+        return stopPropagation;
     }
 
     // handles local position and passes rendering down to children
