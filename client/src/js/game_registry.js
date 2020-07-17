@@ -1,22 +1,12 @@
 export class GameRegistry {
     constructor() {
-        // BusinessLookup instance
-        this.businessLookup = null;
+        // sides slider
+        this.sidesUI = null;
 
-        // PlayerInventory instance
-        this.playerInventory = null;
-        // PlayerStorage instace
-        this.playerStorage = null;
-        // PlayerStats instance
-        this.playerStats = null;
+        // dice data manager
+        this.diceManager = null;
 
-        // GameData
-        this.gameData = null;
+        this.dicePanel = null;
 
-        // AchievementTracker
-        this.achievements = null;
-
-        // ToastManager
-        this.toasts = null;
     }
 }

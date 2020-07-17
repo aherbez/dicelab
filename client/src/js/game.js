@@ -2,12 +2,12 @@ import { GameRegistry } from './game_registry';
 import { GameData } from './game_data';
 import { GameScreen } from './ui/game_screen';
 import { Colors } from './ui/styles';
+import { ToastManager } from './ui/toast_manager';
+import { DiceManager } from './dice/dice_data';
 
 /**
  * DicelabClient: main game class
  */
-
-const TICK_TIME_MS = 500;
 
 export class DicelabClient {
 
@@ -22,6 +22,7 @@ export class DicelabClient {
 
         document.onmousedown = this.mouseDown.bind(this);
 
+        this.startGame();
         this.update();
     }
 
@@ -58,6 +59,7 @@ export class DicelabClient {
     }
 
     startGame() {
+        /*
         const { 
             gameData,
             businessLookup,
@@ -65,6 +67,9 @@ export class DicelabClient {
             playerStorage,
             upgrades
         } = this.gameRegistry;
+        */
+
+        this.gameRegistry.diceManager = new DiceManager(2, 6);
 
         this.mainScreen = new GameScreen(this.gameRegistry);
         this.children.push(this.mainScreen);
@@ -97,7 +102,6 @@ export class DicelabClient {
             ctx.save();
             ctx.translate(width/2, height/2);
             ctx.fillText('loading', 0, 0);
-
             ctx.restore();
         }
 
@@ -105,15 +109,9 @@ export class DicelabClient {
     }
 
     update() {
-        const { playerInventory } = this.gameRegistry;
-
         let curr = Date.now();
         let deltaTime = curr - this.lastTime;
         this.lastTime = curr;
-
-        if (playerInventory) {
-            playerInventory.tick();
-        }
 
         this.render(deltaTime);
 
