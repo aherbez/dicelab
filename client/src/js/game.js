@@ -4,6 +4,7 @@ import { GameScreen } from './ui/game_screen';
 import { Colors } from './ui/styles';
 import { ToastManager } from './ui/toast_manager';
 import { DiceManager } from './dice/dice_data';
+import { ChallengeManager } from './challenges/challenge_manager';
 
 /**
  * DicelabClient: main game class
@@ -52,20 +53,16 @@ export class DicelabClient {
 
     }
 
-    initTimers() {
-        this.lastTime = Date.now();
-        this.tickTimer = 0;
-
-    }
-
     startGame() {
 
         const dm = new DiceManager(2, 6);
         dm.addDie(6);
-        dm.addDie(8);
-
+        dm.addDie(6);
         this.gameRegistry.diceManager = dm;
-        // this.gameRegistry.diceManager.dice[0].setConstant(3);
+        this.gameRegistry.diceManager.dice[0].setConstant(3);
+
+        let challenges = new ChallengeManager(this.gameRegistry);
+        this.gameRegistry.challenges = challenges;
 
         this.mainScreen = new GameScreen(this.gameRegistry);
         this.children.push(this.mainScreen);

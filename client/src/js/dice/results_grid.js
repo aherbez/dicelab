@@ -11,6 +11,10 @@ export class ResultsGrid extends Entity {
         super();
         this.registry = gr;
 
+        this.reset();
+    }
+
+    reset() {
         const { diceManager } = this.registry;
 
         this.dieA = diceManager.getDie(0) || null;

@@ -71,6 +71,19 @@ export class DiceManager {
         return this.dice[index];
     }
 
+    clearChallenge() {
+        this.clearDice();
+        this.addDie(6);
+        this.addDie(6);
+    }
+
+    setFromChallenge(challengeData) {
+        const { dieA, dieB } = challengeData;
+        this.clearDice();
+        this.addDie(dieA.sides);
+        this.addDie(dieB.sides);
+    }
+
     // default to getting the first two dice
     getResults() {
         if (this.lastResults === null) {

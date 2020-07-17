@@ -3,9 +3,9 @@ import { Dimensions, Colors } from '../ui/styles';
 import { DieFace } from '../dice/die_face';
 
 export class SingleDiePanel extends Entity {
-    constructor(label, diceData) {
+    constructor(gr, label, diceData, isChallengePanel) {
         super();
-        this.label = label || 'A';
+        this.registry = gr;
         this.diceData = diceData;
 
         const { dieSize, dieSeparation, diePanelOffsetX } = Dimensions; 
@@ -13,7 +13,16 @@ export class SingleDiePanel extends Entity {
         this.bounds.x = (this.diceData.numSides * (dieSize + dieSeparation)) + diePanelOffsetX;
         this.bounds.y = Dimensions.dieSize + (Dimensions.dieSeparation * 2);
 
+        // can this panel be manipulated in challenge mode?
+        this.isChallengePanel = isChallengePanel;
+
         this.initFaces();
+    }
+
+    setChallenge(playingChallenge) {
+        if (playingChallenge && !this.isChallengePanel) {
+            this.enabled = false;
+        }
     }
 
     initFaces() {
@@ -42,21 +51,31 @@ export class SingleDiePanel extends Entity {
         ctx.save();
         ctx.font = '60px Helvetica';
         ctx.fillStyle = textColor;
-        ctx.fillText(this.label, 10, dieSize * 0.8);
+        ctx.fillText(this.diceData.label, 10, dieSize * 0.8);
         ctx.restore();
     }
 
     drawTotalPips(ctx) {
+
         const { textColor } = Colors;
         const { dieSize, dieSeparation, diePanelOffsetX } = Dimensions;
         
-        const rightEdge = this.bounds.x + 10 + dieSize/2;
+        const rightEdge = this.bounds.x + 10 + dieSize;
+        
+        // only get this once since the getter runs through the values array
+        const totalPips = this.diceData.totalPips;
+        let pipStr = `${totalPips}`;
+
+        const currChallenge = this.registry.challenges.currentChallenge;
+        if ((currChallenge !== null) && (currChallenge.playerPips !== -1)) {
+            pipStr = `${totalPips}/${currChallenge.playerPips}`;
+        }
 
         ctx.save();
         ctx.textAlign = "center";
         ctx.fillStyle = textColor;
         ctx.font = `${dieSize * 0.8}px Helvetica`;
-        ctx.fillText(`${this.diceData.totalPips}`, rightEdge, dieSize * 0.8);
+        ctx.fillText(pipStr, rightEdge, dieSize * 0.8);
 
         ctx.font = `${dieSize * 0.2}px Helvetica`;
         ctx.fillText('pips', rightEdge, dieSize);
@@ -71,7 +90,10 @@ export class SingleDiePanel extends Entity {
         ctx.strokeRect(0, 0, this.bounds.x, this.bounds.y);
 
         this.drawDieName(ctx);
-        this.drawTotalPips(ctx);
+
+        if (this.isChallengePanel) {
+            this.drawTotalPips(ctx);
+        }
 
         ctx.restore();
     }
