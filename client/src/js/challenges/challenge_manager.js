@@ -20,13 +20,13 @@ export class Challenge {
         this.playerPips = data.playerPips || -1;
 
         this.target = {
-            targetVal: data.targetVal || '0.4',
-            targetRel: data.targetRel || Relations.GREATER_OR_EQUAL
+            targetVal: data.target.targetVal || '0.4',
+            targetRel: data.target.targetRel || Relations.GREATER_OR_EQUAL
         }
     }
 
     get challengeText() {
-        let s = `Can you make dice B win ${perecentStr(this.target.targetVal)}`;
+        let s = `Can you make dice B win ${percentStr(this.target.targetVal)}`;
 
         if (this.playerPips !== -1) {
             s += ` using ${this.playerPips} or fewer pips?`;
@@ -44,6 +44,7 @@ export class ChallengeManager {
             this.challenges.set(challenge.id, challenge);
         });
 
+        this.lastChallengeID = -1;
         this._currentChallenge = null;
     }
 
@@ -58,11 +59,18 @@ export class ChallengeManager {
         
             // setup dice
             this.registry.diceManager.setFromChallenge(this._currentChallenge);
+            this.lastChallengeID = id;
         }
     }
 
     setToRandomChallenge() {
-        const keys = Array.from(this.challenges.keys());
+        let keys = Array.from(this.challenges.keys());
+
+        // remove the most recent one
+        keys = keys.filter(v => {
+            return v !== this.lastChallengeID;
+        });
+
         const challengeID = keys[Math.floor(Math.random() * keys.length)];
 
         this.setChallenge(challengeID);

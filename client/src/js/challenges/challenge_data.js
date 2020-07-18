@@ -48,7 +48,7 @@ export const ChallengeData = [
             sides: 4,
             values: [3,3,3,3]
         },
-        playerPips: -1,
+        playerPips: 16,
         target: {
             targetVal: 0.75,
             targetRel: Relations.GREATER_OR_EQUAL

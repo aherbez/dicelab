@@ -5,6 +5,7 @@ import { Colors } from './styles';
 import { DicePanel } from '../dice/dice_panel';
 import { ResultsGrid } from '../dice/results_grid';
 import { ResultsPercent } from '../dice/results_percent';
+import { TextBox } from './text_box';
 
 export class GameScreen extends Entity {
     constructor(gr) {
@@ -26,6 +27,10 @@ export class GameScreen extends Entity {
         this.resultsPercent = new ResultsPercent(this.registry);
         this.resultsPercent.setPos(400, 200);
         this.children.push(this.resultsPercent);
+
+        this.challengeText = new TextBox(300);
+        this.challengeText.setPos(400, 500);
+        this.children.push(this.challengeText);
 
         this.challengeButton = new Button({
             label: 'challenge',
@@ -51,20 +56,26 @@ export class GameScreen extends Entity {
         this.dicePanel.reset();
         this.resultsGrid.reset();
 
+        this.challengeText.visible = isChallenge;
+
         this.dicePanel.setChallenge(isChallenge);
     }
 
     clearChallenge() {
-        const { challenges, diceManager } = this.registry;
+        const { challenges } = this.registry;
         challenges.setToFreeplay();
-        console.log('FREEPLAY!');
+
+        this.challengeText.text = '';
+
         this.resetGame(false);
     }
 
     setChallenge() {
-        const { challenges, diceManager } = this.registry;
+        const { challenges } = this.registry;
         challenges.setToRandomChallenge();
-        console.log('RANDOM CHALLENGE');
+
+        this.challengeText.text = challenges.currentChallenge.challengeText;
+
         this.resetGame(true);
 
     }

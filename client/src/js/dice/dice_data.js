@@ -75,6 +75,8 @@ export class DiceManager {
         this.clearDice();
         this.addDie(6);
         this.addDie(6);
+
+        this.updateResults();
     }
 
     setFromChallenge(challengeData) {
@@ -82,6 +84,8 @@ export class DiceManager {
         this.clearDice();
         this.addDie(dieA.sides);
         this.addDie(dieB.sides);
+
+        this.updateResults();
     }
 
     // default to getting the first two dice
@@ -94,7 +98,6 @@ export class DiceManager {
 
     updateResults() {
         this.lastResults = this._compareDice(0, 1);
-        console.log('updated results', this.lastResults);
     }
 
     // ... but allow for more than two to be managed at a time
