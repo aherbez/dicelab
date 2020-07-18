@@ -49,10 +49,8 @@ export class TextBox extends Entity {
 
         this.lines.forEach(l => {
             ctx.fillText(l, 0, 0);
-            ctx.translate(0, 20);
+            ctx.translate(0, 24);
         });
-
-        // ctx.fillText(this._text, 0, 0);
 
         ctx.restore();
     }

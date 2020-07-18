@@ -50,8 +50,9 @@ export class SingleDiePanel extends Entity {
 
         ctx.save();
         ctx.font = '60px Helvetica';
+        ctx.textAlign = "center";
         ctx.fillStyle = textColor;
-        ctx.fillText(this.diceData.label, 10, dieSize * 0.8);
+        ctx.fillText(this.diceData.label, dieSize/2, dieSize);
         ctx.restore();
     }
 

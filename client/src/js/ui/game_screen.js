@@ -7,6 +7,8 @@ import { ResultsGrid } from '../dice/results_grid';
 import { ResultsPercent } from '../dice/results_percent';
 import { TextBox } from './text_box';
 
+const INSTRUCTIONS = 'Click on the dice faces to change their values and experiement, or click on the challenges button to try a puzzle';
+
 export class GameScreen extends Entity {
     constructor(gr) {
         super();
@@ -28,16 +30,19 @@ export class GameScreen extends Entity {
         this.resultsPercent.setPos(400, 200);
         this.children.push(this.resultsPercent);
 
-        this.challengeText = new TextBox(300);
+        this.challengeText = new TextBox(400);
         this.challengeText.setPos(400, 500);
         this.children.push(this.challengeText);
+        this.challengeText.text = INSTRUCTIONS;
+
 
         this.challengeButton = new Button({
             label: 'challenge',
             callback: () => {this.setChallenge();},
             width: 100,
             radius: 2,
-
+            border: 1,
+            fill: '#E4572E'
         });
         this.challengeButton.setPos(690, 300);
         this.children.push(this.challengeButton);
@@ -46,7 +51,9 @@ export class GameScreen extends Entity {
             label: 'freeplay',
             callback: () => {this.clearChallenge();},
             width: 100,
-            radius: 2
+            radius: 2,
+            border: 1,
+            fill: '#06BEE1'
         });
         this.freeplayButton.setPos(690, 200);
         this.children.push(this.freeplayButton);
@@ -59,10 +66,11 @@ export class GameScreen extends Entity {
                 width: 30,
                 height: 30,
                 radius: 2,
-                border: 1
+                border: 1,
+                fill: '#06BEE1'
 
             });
-            b.setPos(690 + (i*32), 250);
+            b.setPos(690 + (i*32) + 4, 256);
             this.children.push(b);
         });
 
@@ -81,8 +89,6 @@ export class GameScreen extends Entity {
         this.dicePanel.reset();
         this.resultsGrid.reset();
 
-        this.challengeText.visible = isChallenge;
-
         this.dicePanel.setChallenge(isChallenge);
     }
 
@@ -91,7 +97,7 @@ export class GameScreen extends Entity {
         challenges.setToFreeplay();
         diceManager.clearChallenge(numSides);
 
-        this.challengeText.text = '';
+        this.challengeText.text = INSTRUCTIONS;
 
         this.resetGame(false);
     }

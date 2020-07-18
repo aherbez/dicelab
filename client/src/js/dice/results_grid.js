@@ -50,6 +50,13 @@ export class ResultsGrid extends Entity {
         const fontSize = Math.floor(Math.min(cellWidth, cellHeight) * 0.8);
 
         ctx.save();
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(0, 0, resultsPanelSize, resultsPanelSize);
+
+        ctx.restore();
+
+
+        ctx.save();
         ctx.font = `${fontSize}px Helvetica`;
 
         ctx.save();

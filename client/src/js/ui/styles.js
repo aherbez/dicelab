@@ -11,13 +11,13 @@ export const Dimensions = {
 }
 
 export const Colors = {
-    backColorMain: '#e8e4e1',
+    backColorMain: '#EEF0F2', // F4E4BA
     backColorOn: '#ec823a',
     backColorOff: '#f9c49a',
     borderColorMain: '#7c3c21',
     backgroundBlue: '#12cad6',
     pipColor: '#000',
-    diceColors: ['#f00', '#0F0', '#00F'],
+    diceColors: ['#3D52D5', '#84E296', '#00F'],
     tiedColor: '#aaa',
     textColor: '#000',
     dieColorActive: '#fff',
