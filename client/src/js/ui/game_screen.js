@@ -35,7 +35,8 @@ export class GameScreen extends Entity {
         this.challengeButton = new Button({
             label: 'challenge',
             callback: () => {this.setChallenge();},
-            width: 100
+            width: 100,
+            radius: 2,
 
         });
         this.challengeButton.setPos(690, 300);
@@ -44,13 +45,37 @@ export class GameScreen extends Entity {
         this.freeplayButton = new Button({
             label: 'freeplay',
             callback: () => {this.clearChallenge();},
-            width: 100
-
+            width: 100,
+            radius: 2
         });
         this.freeplayButton.setPos(690, 200);
         this.children.push(this.freeplayButton);
 
+        const diceSides = [4,6,8];
+        diceSides.forEach((numSides, i) => {
+            const b = new Button({
+                label: `${numSides}`,
+                callback: () => {this.clearChallenge(numSides)},
+                width: 30,
+                height: 30,
+                radius: 2,
+                border: 1
+
+            });
+            b.setPos(690 + (i*32), 250);
+            this.children.push(b);
+        });
+
     }
+
+    /*
+        radius: 10,
+    fill: '#AFA',
+    disabledColor: '#AAA',
+    strokeColor: '#000',
+    strokeColorDisabled: '#000',
+    border: 3,    
+    */
 
     resetGame(isChallenge) {
         this.dicePanel.reset();
@@ -61,9 +86,10 @@ export class GameScreen extends Entity {
         this.dicePanel.setChallenge(isChallenge);
     }
 
-    clearChallenge() {
-        const { challenges } = this.registry;
+    clearChallenge(numSides = 6) {
+        const { challenges, diceManager } = this.registry;
         challenges.setToFreeplay();
+        diceManager.clearChallenge(numSides);
 
         this.challengeText.text = '';
 
@@ -71,10 +97,13 @@ export class GameScreen extends Entity {
     }
 
     setChallenge() {
-        const { challenges } = this.registry;
+        const { challenges, diceManager } = this.registry;
         challenges.setToRandomChallenge();
 
-        this.challengeText.text = challenges.currentChallenge.challengeText;
+        const challenge = challenges.currentChallenge;
+
+        diceManager.setFromChallenge(challenge);
+        this.challengeText.text = challenge.challengeText;
 
         this.resetGame(true);
 

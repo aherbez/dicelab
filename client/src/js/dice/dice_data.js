@@ -71,10 +71,10 @@ export class DiceManager {
         return this.dice[index];
     }
 
-    clearChallenge() {
+    clearChallenge(numSides = 6) {
         this.clearDice();
-        this.addDie(6);
-        this.addDie(6);
+        this.addDie(numSides);
+        this.addDie(numSides);
 
         this.updateResults();
     }

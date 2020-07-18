@@ -26,11 +26,26 @@ export class Challenge {
     }
 
     get challengeText() {
-        let s = `Can you make dice B win ${percentStr(this.target.targetVal)}`;
+        let s = 'Can you make dice B win';
+        switch (this.target.targetRel) {
+            case Relations.GREATER_OR_EQUAL:
+                s += ' at least ';
+                break;
+            case Relations.LESS_OR_EQUAL:
+                s += ' at most ';
+                break;
+            default:
+                break;
+        }
+
+        s += `${percentStr(this.target.targetVal)} of the time`;
 
         if (this.playerPips !== -1) {
-            s += ` using ${this.playerPips} or fewer pips?`;
+            s += ` using ${this.playerPips} or fewer pips`;
         }
+
+        s += '?';
+
         return s;
     }
 }
@@ -50,7 +65,6 @@ export class ChallengeManager {
 
     setToFreeplay() {
         this._currentChallenge = null;
-        this.registry.diceManager.clearChallenge();
     }
 
     setChallenge(id) {
@@ -58,7 +72,6 @@ export class ChallengeManager {
             this._currentChallenge = this.challenges.get(id);
         
             // setup dice
-            this.registry.diceManager.setFromChallenge(this._currentChallenge);
             this.lastChallengeID = id;
         }
     }

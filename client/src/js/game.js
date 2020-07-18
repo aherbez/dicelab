@@ -12,7 +12,7 @@ import { ChallengeManager } from './challenges/challenge_manager';
 
 export class DicelabClient {
 
-    constructor(stageId) {
+    constructor(stageId, printCanvasId) {
         let mainScreen = null;
         
         this.initCanvas(stageId);
