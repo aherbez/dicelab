@@ -2,7 +2,6 @@ import { GameRegistry } from './game_registry';
 import { GameData } from './game_data';
 import { GameScreen } from './ui/game_screen';
 import { Colors } from './ui/styles';
-import { ToastManager } from './ui/toast_manager';
 import { DiceManager } from './dice/dice_data';
 import { ChallengeManager } from './challenges/challenge_manager';
 
@@ -12,7 +11,7 @@ import { ChallengeManager } from './challenges/challenge_manager';
 
 export class DicelabClient {
 
-    constructor(stageId, printCanvasId) {
+    constructor(stageId) {
         let mainScreen = null;
         
         this.initCanvas(stageId);
@@ -67,10 +66,6 @@ export class DicelabClient {
         this.mainScreen = new GameScreen(this.gameRegistry);
         this.children.push(this.mainScreen);
 
-        // put toasts on top of everything else
-        this.gameRegistry.toasts = new ToastManager(this.gameRegistry);
-        this.gameRegistry.toasts.setPos(0, 0);
-        this.mainScreen.children.push(this.gameRegistry.toasts);
     }
 
     /**

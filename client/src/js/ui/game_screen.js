@@ -75,16 +75,7 @@ export class GameScreen extends Entity {
         });
 
     }
-
-    /*
-        radius: 10,
-    fill: '#AFA',
-    disabledColor: '#AAA',
-    strokeColor: '#000',
-    strokeColorDisabled: '#000',
-    border: 3,    
-    */
-
+    
     resetGame(isChallenge) {
         this.dicePanel.reset();
         this.resultsGrid.reset();

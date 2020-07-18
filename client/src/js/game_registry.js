@@ -5,14 +5,5 @@ export class GameRegistry {
 
         // challenges
         this.challenges = null;
-
-        // dice panels
-        this.dicePanel = null;
-
-        // results grid
-        this.resultsGrid = null;
-
-        // percent results
-        this.resultsPercent = null;
     }
 }
