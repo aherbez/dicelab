@@ -14,9 +14,9 @@ export const ChallengeData = [
         },
         dieB: {
             sides: 6,
-            values: [3,3,3,3,3,3]
+            values: [1,1,1,1,1,1]
         },
-        playerPips: 18,
+        playerPips: 21,
         target: {
             targetVal: 0.5,
             targetRel: Relations.GREATER_OR_EQUAL
@@ -50,7 +50,7 @@ export const ChallengeData = [
         },
         playerPips: 16,
         target: {
-            targetVal: 0.75,
+            targetVal: 0.4,
             targetRel: Relations.GREATER_OR_EQUAL
         }
     },

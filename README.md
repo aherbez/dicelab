@@ -4,7 +4,7 @@ Repo for an interactive lab for exploration competitive dice design
 
 ## Project Log
 
-# Friday, 7/17/2020
+### Friday, 7/17/2020
 
 10:37: Setting up project. Cloning from my clicker game (https://github.com/aherbez/clicker/) in order to re-use the basic UI framework I built for it (based on my open-source JS mini-engine, Stirling.js)
 
@@ -43,4 +43,8 @@ Repo for an interactive lab for exploration competitive dice design
 5:33: Added buttons below freeplay to allow the player to experiment with 4, 6, and 8-sided dice.
 
 5:52: Played around with the colors a bit to (hopefully) make things look a bit better. Going to call it a wrap and use the remaining 30min or so on a writeup
+
+### Sunday 7/19/2020
+
+5:57: Wanted to make sure that all the challenges are actually solvable, so changing the data in challenge_data.js. Not changing anything else about the game though, to respect the 8 hour time limit
 
